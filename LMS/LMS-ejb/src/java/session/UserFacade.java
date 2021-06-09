@@ -49,7 +49,7 @@ public class UserFacade implements UserFacadeRemote {
         return em.find(Users.class, id);
     }
 
-//    @RolesAllowed({"LMS-APP-ADMIN"})
+    @RolesAllowed({"LMS-APP-ADMIN"})
     @Override
     public boolean createRecord(UserDTO userDTO) {
         if (find(userDTO.getUserid()) != null) {

@@ -61,7 +61,7 @@ public class Books implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRICE")
-    private double price;
+    private float price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookid")
     private Collection<IssuedBooks> issuedBooksCollection;
 
@@ -72,7 +72,7 @@ public class Books implements Serializable {
         this.bookid = bookid;
     }
 
-    public Books(String bookid, String title, String author, int stockcount, double price) {
+    public Books(String bookid, String title, String author, int stockcount, float price) {
         this.bookid = bookid;
         this.title = title;
         this.author = author;
@@ -112,11 +112,11 @@ public class Books implements Serializable {
         this.stockcount = stockcount;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

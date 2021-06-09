@@ -87,4 +87,21 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <description>Add Book</description>
+        <from-view-id>/admin/books/addBook.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/admin/books/addBookSuccess.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/admin/books/addBookFailure.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>debug</from-outcome>
+            <to-view-id>/admin/books/debugBookId.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>

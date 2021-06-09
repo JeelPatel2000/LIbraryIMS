@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Add a book</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+        <ui:include src="../../common/header.xhtml"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+
+            <div class="row">
+                <h4>Fill Book details</h4>
+                <div>
+                    <h:form class="row col-lg-6 g-3">
+
+                        <div class="col-lg-12">
+                            <h:outputLabel class="form-label" for="bookid" value="Book Id"/>
+                            <h:inputText class="form-control" title="BookId" id="bookid"
+                                         required="true" 
+                                         requiredMessage="Book id must not be blank"
+                                         maxlength="5" 
+                                         value="#{bookManagedBean.bookid}">
+                                <f:validateLength minimum="1" maximum="10"/>
+                            </h:inputText>
+                            <h:message for="empid" style="color:red"/>
+                        </div>
+                        <div class="col-lg-12">
+                            <h:outputLabel class="form-label" for="title" value="Title"/>
+                            <h:inputText class="form-control" title="Book Title" id="title"
+                                         maxlength="50"
+                                         required="true" 
+                                         requiredMessage="Name must not be blank"
+                                         value="#{bookManagedBean.title}"/>
+                            <h:message for="name" style="color:red"/>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <h:outputLabel class="form-label" for="author" value="Author"/>
+                            <h:inputText class="form-control" id="author" title="Author" maxlength="50" 
+                                         required="true"
+                                         value="#{bookManagedBean.author}"/>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <h:outputLabel class="form-label" for="price" value="Price"/>
+                            <h:inputText class="form-control" id="price" title="Price" maxlength="10" 
+                                         required="true"
+                                         value="#{bookManagedBean.price}"/>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <h:outputLabel class="form-label" for="stock" value="Stock Count"/>
+                            <h:inputText class="form-control" id="stock" title="Stock Count" maxlength="10" 
+                                         required="true"
+                                         value="#{bookManagedBean.bookCount}"/>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <h:commandButton class="btn btn-success" id="submit" value="Add Book" 
+                                             action="#{bookManagedBean.addBook()}"/>
+                        </div>
+
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
