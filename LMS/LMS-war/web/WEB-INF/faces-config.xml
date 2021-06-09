@@ -59,5 +59,32 @@
             <to-view-id>/admin/deleteUserFailure.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <description>Change user page</description>
+        <from-view-id>/admin/editUser.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/admin/editUserPage.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/admin/editUserFailure.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>debug</from-outcome>
+            <to-view-id>/admin/debugEmpId.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Edit User</description>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/admin/editUserSuccess.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/admin/editUserFailure.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
     
 </faces-config>

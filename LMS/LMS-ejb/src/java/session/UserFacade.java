@@ -8,6 +8,7 @@ package session;
 import entity.Users;
 import entity.UserDTO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
@@ -93,10 +94,30 @@ public class UserFacade implements UserFacadeRemote {
         return userDTOList;
     }
 
+    private Users employeeDTO2Entity(UserDTO userDTO) {
+        if (userDTO == null) {
+            // just in case
+            return null;
+        }
+        String userid = userDTO.getUserid();
+        String name = userDTO.getName();
+        Date dob = userDTO.getDob();
+        String email = userDTO.getEmail();
+        String address = userDTO.getAddress();
+        String password = userDTO.getPassword();
+        String userGroup = userDTO.getUserGroup();
+        Boolean active = userDTO.getActive();
+
+        Users user = new Users(userid, name, dob, address, email, password, userGroup, active);
+
+        return user;
+    }
+
     @RolesAllowed({"LMS-APP-ADMIN", "LMS-APP-USER"})
     @Override
     public UserDTO getRecord(String userid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return myDAO2DTO(find(userid));
+
     }
 
     @RolesAllowed({"LMS-APP-ADMIN"})
@@ -118,7 +139,17 @@ public class UserFacade implements UserFacadeRemote {
     @RolesAllowed({"LMS-APP-ADMIN", "LMS-APP-USER"})
     @Override
     public boolean updateRecord(UserDTO userDTO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!hasUser(userDTO.getUserid())) {
+            return false;
+        }
+
+        // employee exist, update details
+        // convert to entity class
+        Users user = this.employeeDTO2Entity(userDTO);
+        // update details
+        edit(user);
+
+        return true;
     }
 
     @Override
@@ -126,5 +157,11 @@ public class UserFacade implements UserFacadeRemote {
         List<Users> _users = em.createNamedQuery("Users.findAll", Users.class).getResultList();
 
         return usersListToUserDTOList(_users);
+    }
+
+    @Override
+    public boolean hasUser(String userid) {
+        System.out.println(userid);
+        return (find(userid) != null);
     }
 }

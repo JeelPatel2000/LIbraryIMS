@@ -25,4 +25,6 @@ public interface UserFacadeRemote {
     public boolean updateRecord(UserDTO userDTO);
 
     public List<UserDTO> getUsers();
+
+    public boolean hasUser(String userid);
 }

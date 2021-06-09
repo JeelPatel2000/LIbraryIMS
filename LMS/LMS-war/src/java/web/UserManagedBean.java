@@ -20,6 +20,8 @@ import java.util.List;
 import static java.util.Objects.isNull;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import session.UserFacadeRemote;
 
@@ -204,8 +206,89 @@ public class UserManagedBean implements Serializable {
     }
 
     public List<UserDTO> getUsers() {
-
         return userFacade.getUsers();
+    }
+
+    public void startConversation() {
+        conversation.begin();
+    }
+
+    public void endConversation() {
+        conversation.end();
+    }
+
+    private String setEmployeeDetails() {
+
+        if (isNull(userid) || conversation == null) {
+            return "debug";
+        }
+
+        UserDTO e = userFacade.getRecord(userid);
+
+        if (e == null) {
+            // no such employee
+            return "failure";
+        } else {
+            // found - set details for display
+            this.userid = e.getUserid();
+            this.name = e.getName();
+            this.address = e.getAddress();
+            this.email = e.getEmail();
+            this.dob = String.valueOf(e.getDob().getDate()) + "-" + String.valueOf(e.getDob().getMonth()) + "-" + String.valueOf(e.getDob().getYear() + 1900);
+            this.password = e.getPassword();
+            this.userGroup = e.getUserGroup();
+            this.active = e.getActive();
+            return "success";
+        }
+    }
+
+    public String setEmployeeDetailsForChange() {
+        // check empId is null
+        if (isNull(userid) || conversation == null) {
+            return "debug";
+        }
+
+        if (!userFacade.hasUser(userid)) {
+            return "failure";
+        }
+
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        ExternalContext externalContext = context.getExternalContext();
+//
+//        if (externalContext.isUserInRole("ED-APP-USERS")) {
+//            UserDTO e = userFacade.getRecord(userid);
+//            String pwd = e.getPassword();
+//
+//            if (!pwd.equals(password)) {
+//                return "authfailure";
+//            }
+//        }
+        // note the startConversation of the conversation
+        startConversation();
+
+        // get employee details
+        return setEmployeeDetails();
+    }
+
+    public String editUser() throws ParseException {
+        // check empId is null
+        if (isNull(userid)) {
+            return "debug";
+        }
+
+        Date temp_dob = new SimpleDateFormat("dd-MM-yyyy").parse(dob);
+
+        UserDTO userDTO = new UserDTO(userid, name, temp_dob, email, address, password, userGroup, active);
+        boolean result = userFacade.updateRecord(userDTO);
+
+        // note the endConversation of the conversation
+        endConversation();
+
+        if (result) {
+            return "success";
+        } else {
+            return "failure";
+        }
     }
 
 }
