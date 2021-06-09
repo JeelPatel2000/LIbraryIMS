@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#{request.contextPath}/faces/index.xhtml">Library IMS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-2">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#{request.contextPath}/faces/admin/mainmenu.xhtml">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#"  id="booksNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Books</a>
+                        <ul class="dropdown-menu" aria-labelledby="booksNavbarDropdown">
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/addBook.xhtml">Add book</a></li>
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/deleteBook.xhtml">Delete book</a></li>
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/bookDeatils.xhtml">Book details</a></li>
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/editBook.xhtml">Edit book</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="usersNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Users
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="usersNavbarDropdown">
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/displayUsers.xhtml">View all users</a></li>
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/addUser.xhtml">Add user</a></li>
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/deleteUser.xhtml">Delete user</a></li>
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/userDeatils.xhtml">User details</a></li>
+
+                            <!--<li><hr class="dropdown-divider"></li>-->
+                            <li><a class="dropdown-item" href="#{request.contextPath}/faces/admin/editUser.xhtml">Edit user</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <h:form class="d-flex">
+                    <h:commandButton class="btn btn-outline-danger" value="Logout" action="#{loginManagedBean.logoutResult()}"/>           
+                </h:form>
+
+            </div>
+        </div>
+    </nav>
+
+
+
+</html>
+
